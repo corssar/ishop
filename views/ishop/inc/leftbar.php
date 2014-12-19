@@ -1,0 +1,51 @@
+<?php defined('ISHOP') or die('Access denied'); ?>
+<div id="left-bar">
+			<div class="left-bar-cont">
+				<h2>Каталог</h2>
+				<h3 class="nav-new"><a href="?view=new">Новинки</a></h3>
+				<h3 class="nav-lider"><a href="?view=hits">Лидеры продаж</a></h3>
+				<h3 class="nav-sale"><a href="?view=sale">Распродажа</a></h3>
+                <!-- Меню категорий -->
+				<h4>- Категория</h4>
+				<ul class="nav-catalog" id="accordion">
+                    <?php foreach($cat as $key => $item): ?>
+                        <?php if(count($item) > 1): // если это родительская категория ?>
+                        <h3><li><a href="#"><?=$item[0]?></a></li></h3>
+                            <ul>
+                                <li>- <a href="?view=cat&amp;category=<?=$key?>">Все </a></li>
+                                <?php foreach($item['sub'] as $key => $sub): ?>
+                                <li>- <a href="?view=cat&amp;category=<?=$key?>"><?=$sub?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php elseif($item[0]): // если самостоятельная категория ?>
+                            <li><a href="?view=cat&amp;category=<?=$key?>"><?=$item[0]?></a></li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+				</ul>
+                <!-- Меню категорий -->
+				<div class="news">
+					<h3>Новости</h3>
+                    <?php if($news): ?>
+                        <?php foreach($news as $item): ?>
+                            <p>
+					           <span><?=$item['date']?></span>
+        					   <a href="?view=news&amp;news_id=<?=$item['news_id']?>"><?=$item['title']?></a>	
+        					</p>   
+                        <?php endforeach; ?>
+                        <a href="?view=archive" class="news-arh">Архив новостей</a>
+                    <?php else: ?>
+                        <p>Новостей пока нет.</p>
+                    <?php endif; ?>
+				</div> <!-- .news -->
+                <!-- Информеры -->
+                <?php foreach($informers as $informer): ?>
+                <div class="info">
+                    <h3><?=$informer[0]?></h3>
+                    <?php foreach($informer['sub'] as $key => $sub): ?>
+                    <p>- <a href="?view=informer&amp;informer_id=<?=$key?>"><?=$sub?></a></p>
+                    <?php endforeach; ?>
+                </div> <!-- .info -->
+                <?php endforeach; ?>
+                <!-- Информеры -->
+			</div>		
+		</div>
