@@ -3,7 +3,7 @@
 defined('ISHOP') or die('Access denied');
 
 // домен
-define('PATH', 'http://ishop/');
+define('PATH', 'http://ishop-lera.azurewebsites.net/');
 
 // модель
 define('MODEL', 'model/model.php');
